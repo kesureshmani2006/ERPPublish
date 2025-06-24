@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy solution and restore
+# Copy solution and projects
 COPY *.sln ./
 COPY ERP.API/ERP.API.csproj ERP.API/
 COPY ERP.Models/ERP.Models.csproj ERP.Models/
@@ -10,9 +10,10 @@ COPY ERP.Database/ERP.Database.csproj ERP.Database/
 COPY ERP.BusinessLogic/ERP.BusinessLogic.csproj ERP.BusinessLogic/
 COPY ERP.BusinessRepository/ERP.BusinessRepository.csproj ERP.BusinessRepository/
 
+# Restore dependencies
 RUN dotnet restore
 
-# Copy everything else and publish
+# Copy full source and publish
 COPY . .
 WORKDIR /src/ERP.API
 RUN dotnet publish -c Release -o /app/publish
