@@ -69,10 +69,10 @@ namespace ERP.BusinessRepository.BusinessRepository.RealEstate
             List<ChequeResponse>? chequeResponse = new List<ChequeResponse>();
             try
             {
-                if ((chequeRequest.ConstractId > 0) && (chequeRequest.TenantsId > 0))
+                if ((chequeRequest.ContractId > 0) && (chequeRequest.TenantId > 0))
                 {
-                    chequeResponse = await _dbContext.ReCheque.Where(x => x.IsActive == true && x.TenantId==chequeRequest.TenantsId &&
-                    x.ContractId==chequeRequest.ConstractId).Select(x => new ChequeResponse
+                    chequeResponse = await _dbContext.ReCheque.Where(x => x.IsActive == true && x.TenantId==chequeRequest.TenantId &&
+                    x.ContractId==chequeRequest.ContractId).Select(x => new ChequeResponse
                     {
                         Id = x.Id,
                         BankName = x.BankName,
@@ -82,14 +82,15 @@ namespace ERP.BusinessRepository.BusinessRepository.RealEstate
                         ContractId = x.ContractId,
                         Status = x.ChqStatus,
                         TenantId = x.TenantId,
+                        Remarks = x.Remarks
 
                     }).ToListAsync();
                 }
                 else 
                 {
-                    if (chequeRequest.ConstractId > 0)
+                    if (chequeRequest.ContractId > 0)
                     {
-                        chequeResponse = await _dbContext.ReCheque.Where(x => x.IsActive == true && x.ContractId== chequeRequest.ConstractId).Select(x => new ChequeResponse
+                        chequeResponse = await _dbContext.ReCheque.Where(x => x.IsActive == true && x.ContractId== chequeRequest.ContractId).Select(x => new ChequeResponse
                         {
                             Id = x.Id,
                             BankName = x.BankName,
@@ -99,6 +100,8 @@ namespace ERP.BusinessRepository.BusinessRepository.RealEstate
                             ContractId = x.ContractId,
                             Status = x.ChqStatus,
                             TenantId = x.TenantId,
+                            Remarks = x.Remarks
+
 
                         }).ToListAsync();
                     }
@@ -124,6 +127,7 @@ namespace ERP.BusinessRepository.BusinessRepository.RealEstate
                     ContractId = x.ContractId,
                     Status = x.ChqStatus,
                     TenantId = x.TenantId,
+                    Remarks = x.Remarks
 
                 }).FirstOrDefaultAsync();
 

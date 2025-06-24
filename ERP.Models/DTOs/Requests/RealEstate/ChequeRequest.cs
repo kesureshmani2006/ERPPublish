@@ -8,7 +8,7 @@ namespace ERP.Models.DTOs.Requests.RealEstate
 {
     public class ChequeRequest
     {
-        public long? TenantsId { get; set; }
-        public long? ConstractId { get; set; }
+        public long? TenantId { get; set; }
+        public long? ContractId { get; set; }
     }
 }

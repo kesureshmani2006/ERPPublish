@@ -16,5 +16,8 @@ namespace ERP.Models.DTOs.Responses.RealEstate
         public string Status { get; set; }
         public long TenantId { get; set; }
         public long ContractId { get; set; }
+
+        public string? Remarks { get; set; }
+        
     }
 }

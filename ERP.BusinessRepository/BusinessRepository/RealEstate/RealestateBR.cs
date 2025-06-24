@@ -516,12 +516,32 @@ namespace ERP.BusinessRepository.BusinessRepository.RealEstate
             List<ReTenantsResponse>? ReTenantsRes = new List<ReTenantsResponse>();
             try
             {
+                //ReTenantsRes = await (
+                //                    from pr in _dbContext.ReProperty
+                //                    join t in _dbContext.ReTenants on pr.Id equals t.PropertyId
+                //                    join c in _dbContext.ReContracts on t.Id equals c.TenantId into Tempten
+                //                    from tp in Tempten.DefaultIfEmpty()
+                //                    where tp == null || tp.IsActive == true
+                //                    select new ReTenantsResponse
+                //                    {
+                //                        Id = t.Id,
+                //                        TenantName = t.TenantName,
+                //                        Email = t.TenantEmail,
+                //                        PhoneNo = t.TenantPhone,
+                //                        PlotNo = pr.PlotNo,
+                //                        ContractId = tp != null ? tp.ContractId : null,
+                //                        AnnualRent = tp != null ? tp.AnnualRent : null,
+                //                        MoveInDate = tp != null ? tp.ContractFromDate : (DateTime?)null,
+                //                        //Status = tp != null ? tp.ContractStatus : null
+                //                        Status="Active"
+                //                    }
+                //                ).ToListAsync();
+
                 ReTenantsRes = await (
                                     from pr in _dbContext.ReProperty
                                     join t in _dbContext.ReTenants on pr.Id equals t.PropertyId
-                                    join c in _dbContext.ReContracts on t.Id equals c.TenantId into Tempten
-                                    from tp in Tempten.DefaultIfEmpty()
-                                    where tp == null || tp.IsActive == true
+                                    join c in _dbContext.ReContracts on t.Id equals c.TenantId 
+                                   
                                     select new ReTenantsResponse
                                     {
                                         Id = t.Id,
@@ -529,10 +549,11 @@ namespace ERP.BusinessRepository.BusinessRepository.RealEstate
                                         Email = t.TenantEmail,
                                         PhoneNo = t.TenantPhone,
                                         PlotNo = pr.PlotNo,
-                                        AnnualRent = tp != null ? tp.AnnualRent : null,
-                                        MoveInDate = tp != null ? tp.ContractFromDate : (DateTime?)null,
+                                        ContractId = c.Id,
+                                        AnnualRent =c.AnnualRent,
+                                        MoveInDate = c.ContractFromDate ,
                                         //Status = tp != null ? tp.ContractStatus : null
-                                        Status="Active"
+                                        Status = "Active"
                                     }
                                 ).ToListAsync();
 
