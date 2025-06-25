@@ -67,11 +67,11 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Run seeding after building the app
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    CsvSeeder.SeedAll(services);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    CsvSeeder.SeedAll(services);
+//}
 
 // Configure the HTTP request pipeline.
 
