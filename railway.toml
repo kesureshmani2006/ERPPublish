@@ -1,2 +1,2 @@
 [build]
-nixpacksPlan = "dotnet-8"
+nixpacksPlan.version = "dotnet-8"
